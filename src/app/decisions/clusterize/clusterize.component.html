@@ -1,0 +1,21 @@
+<div class="demo-header">Cluster.js Demo</div>
+<div>Total Rows {{ totalRows }}</div>
+<div class="clusterize">
+  <table>
+    <thead>
+    <tr>
+      <th>Headers</th>
+    </tr>
+    </thead>
+  </table>
+  <div *ngIf="(mockData | async) !== undefined" id="scrollArea" class="clusterize-scroll" >
+    <table class="test-table">
+      <tbody id="contentArea" class="clusterize-content">
+      <!--<tr *ngFor="let row of (mockData | async)">-->
+        <!--<td *ngFor="let col of row">{{ col.value }}</td></tr>-->
+      </tbody>
+    </table>
+  </div>
+</div>
+
+
