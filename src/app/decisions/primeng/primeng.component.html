@@ -16,7 +16,7 @@
 <!--</p-table>-->
 
 <h3 class="first">Toggleable Row Groups</h3>
-<p-table [value]="mockData" dataKey="brand">
+<p-table [value]="mockData" dataKey="category">
   <ng-template pTemplate="header">
     <tr>
       <th *ngFor="let col of cols">
@@ -26,16 +26,19 @@
   </ng-template>
   <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
     <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.category].index === rowIndex">
-      <td colspan="3">
-        <a href="#" [pRowToggler]="rowData">
-          <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
-          <span>{{rowData.category}}</span>
-        </a>
+      <td *ngFor="let col of cols; let i = index">
+        <div *ngIf="i === 0">
+            <a href="#" [pRowToggler]="rowData">
+              <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
+              <span>{{rowData.category}}</span>
+            </a>
+        </div>
+        <span *ngIf="i !== 0">{{rowData['columns'][i]['value']}}</span>
       </td>
     </tr>
   </ng-template>
   <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
-    <tr>
+    <tr *ngIf="rowIndex !== rowGroupMetadata[rowData.category].index">
       <td *ngFor="let col of cols; let i = index">
         {{ rowData['columns'][i]['value']}}
       </td>

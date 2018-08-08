@@ -13,23 +13,20 @@ export class PrimengComponent implements OnInit, OnDestroy, AfterViewInit {
   public mockData: any;
   public cols: any[];
   public rowGroupMetadata: any;
-  public groupCategoryData: any;
   constructor(private mockDataService: MockDataService) {}
 
   ngOnInit() {
     this.mockDataSubscription = this.mockDataService.getDataV2()
       .subscribe(data => {
+        console.time('renderData2');
         this.mockData = data.cells;
-       console.log(this.mockData);
-
-        // console.log(this.groupCategoryData);
         this.updateRowGroupMetadata();
-         console.log(`row group meta data`, this.rowGroupMetadata);
         this.cols = [];
         for (let col = 0; col < data.sizeY; col++) {
           const incCol = col + 1;
           const columnName = `Column ${incCol}`;
           this.cols.push({header: columnName, field: 'value' });
+          console.timeEnd('renderData2');
         }
       });
   }

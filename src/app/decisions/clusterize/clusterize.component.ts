@@ -21,12 +21,12 @@ export class ClusterizeComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnInit() {
-    this.mockDataSubscription = this.mockDataService.getData()
+    this.mockDataSubscription = this.mockDataService.getDataV2()
       .subscribe(data => {
         this.mockDataArray = [];
         for (const rowItem of data.cells) {
              let row = '<tr>';
-             for ( const col  of rowItem ) {
+             for ( const col  of rowItem['columns'] ) {
                row += `<td style="background-color: ${col.cellColor}; padding: .2em .5em; border: 1px solid #dddddd ">` +
                  + col.value + '</td>';
              }

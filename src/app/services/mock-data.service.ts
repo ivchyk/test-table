@@ -9,8 +9,8 @@ export class MockDataService {
   private cells: Array<Array<any>> = [];
   private cellsData: Array<any> = [];
   private tableHeader: Array<any>;
-  private row: number = 54;
-  private col: number = 5;
+  private row: number = 15000;
+  private col: number = 20;
   private rowDelta: number = 0; // Шанс зміни кількості рядків.
   private cellDelta: number = 0.1; // Шанс зміни значення комірки.
   private groupFactor: Array<any> = [];
@@ -108,12 +108,11 @@ export class MockDataService {
     );
   }
 
-  private makeCategories(rowsAmount: number, rowIndex: number,  groupSize: number = 6) {
+  private makeCategories(rowsAmount: number, rowIndex: number,  groupSize: number = 20) {
     if (groupSize === 0) {
       return [];
     }
-  //  console.log(groupSize, rowsAmount);
-    let categories: Array<string> = [];
+    const categories: Array<string> = [];
     let categoryAmount = 0;
     let rows = rowsAmount;
     while (rows > groupSize) {
@@ -126,7 +125,7 @@ export class MockDataService {
       let groupCounter = 1;
 
       for (let  i = 0; i < rowsAmount; i++) {
-        categories[i] = "Category " + groupCounter;
+        categories[i] = 'Category ' + groupCounter;
         if (counter === groupSize) {
           counter = 1;
           groupCounter++;
@@ -134,7 +133,6 @@ export class MockDataService {
           counter++;
         }
       }
-      console.log(categories);
       return categories;
     }
 
