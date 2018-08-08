@@ -1,6 +1,7 @@
 import { Injectable } from '@angular/core';
 import { interval, Observable, of, Subscription } from 'rxjs';
 import { sample, take, map, mergeMap, timestamp } from 'rxjs/operators';
+import { TableData } from '../source/table-data';
 
 @Injectable({
   providedIn: 'root'
@@ -84,6 +85,25 @@ export class MockDataService {
     }
   }
 
+  private initDataV3(): void {
+    const chanceRowCount = Math.floor(Math.random() * 10) / 10;
+    if (chanceRowCount < this.rowDelta) {
+      const newRowCount  = Math.floor(Math.random() * 10) + 1;
+      if (newRowCount < this.row ) {
+        this.cells.slice(newRowCount, this.row - 1);
+      }
+      this.row = newRowCount;
+    }
+    for (let rowIndex = 0; rowIndex < this.row; rowIndex++) {
+      // determine row group factor
+
+      if (this.cellsData[rowIndex] === undefined) {
+        const columns: Array<number> = [];
+        this.cellsData[rowIndex] = this.takeRow(rowIndex);
+      }
+    }
+  }
+
   public  getData() {
     const source = interval(3000);
     return source.pipe(
@@ -102,6 +122,17 @@ export class MockDataService {
     return source.pipe(
       map (_ => {
         this.initDataV2();
+        return {cells: this.cellsData, sizeX: this.row, sizeY: this.col};
+      }),
+      take(1)
+    );
+  }
+
+  public  getDataV3() {
+    const source = interval(3000);
+    return source.pipe(
+      map (_ => {
+        this.initDataV3();
         return {cells: this.cellsData, sizeX: this.row, sizeY: this.col};
       }),
       take(1)
@@ -137,5 +168,15 @@ export class MockDataService {
     }
 
     return [];
+  }
+
+  private takeRow(rowIndex) {
+    let index = rowIndex;
+    if (TableData[rowIndex] === undefined) {
+      const tableDataSize = TableData.length;
+      const randomIndex = Math.floor(Math.random() * tableDataSize);
+      index = randomIndex;
+    }
+    return TableData[index];
   }
 }
