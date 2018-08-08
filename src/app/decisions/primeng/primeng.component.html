@@ -1,5 +1,5 @@
-<!--<p-table [value]="mockData">-->
-  <!--<ng-template pTemplate="header">-->
+<!-- <p-table [value]="mockData">-->
+  <!-- <ng-template pTemplate="header"> -->
     <!--<tr>-->
       <!--<th *ngFor="let col of cols">-->
         <!--{{col.header}}-->
@@ -15,30 +15,30 @@
   <!--</ng-template>-->
 <!--</p-table>-->
 
-<!--<h3 class="first">Toggleable Row Groups</h3>-->
-<!--<p-table [value]="mockData" dataKey="brand">-->
-  <!--<ng-template pTemplate="header">-->
-    <!--<tr>-->
-      <!--<th *ngFor="let col of cols">-->
-        <!--{{col.header}}-->
-      <!--</th>-->
-    <!--</tr>-->
-  <!--</ng-template>-->
-  <!--<ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">-->
-    <!--<tr class="ui-widget-header" *ngIf="rowGroupMetadata[groupCategoryData[rowIndex]].index === rowIndex">-->
-      <!--<td colspan="3">-->
-        <!--<a href="#" [pRowToggler]="rowData">-->
-          <!--<i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>-->
-          <!--<span>{{groupCategoryData[rowIndex]}}</span>-->
-        <!--</a>-->
-      <!--</td>-->
-    <!--</tr>-->
-  <!--</ng-template>-->
-  <!--<ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">-->
-    <!--<tr>-->
-      <!--<td *ngFor="let col of cols; let i = index">-->
-        <!--{{ rowData[i]['value']}}-->
-      <!--</td>-->
-    <!--</tr>-->
-  <!--</ng-template>-->
-<!--</p-table>-->
+<h3 class="first">Toggleable Row Groups</h3>
+<p-table [value]="mockData" dataKey="brand">
+  <ng-template pTemplate="header">
+    <tr>
+      <th *ngFor="let col of cols">
+        {{col.header}}
+      </th>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="body" let-rowData let-rowIndex="rowIndex" let-expanded="expanded" let-columns="columns">
+    <tr class="ui-widget-header" *ngIf="rowGroupMetadata[rowData.category].index === rowIndex">
+      <td colspan="3">
+        <a href="#" [pRowToggler]="rowData">
+          <i [ngClass]="expanded ? 'fa fa-fw fa-chevron-circle-down' : 'fa fa-fw fa-chevron-circle-right'"></i>
+          <span>{{rowData.category}}</span>
+        </a>
+      </td>
+    </tr>
+  </ng-template>
+  <ng-template pTemplate="rowexpansion" let-rowData let-rowIndex="rowIndex">
+    <tr>
+      <td *ngFor="let col of cols; let i = index">
+        {{ rowData['columns'][i]['value']}}
+      </td>
+    </tr>
+  </ng-template>
+</p-table>

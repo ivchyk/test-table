@@ -23,9 +23,14 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.css"
+              "src/styles.css",
+              "node_modules/clusterize.js/clusterize.css",
+              "node_modules/primeng/resources/primeng.min.css",
+              "node_modules/primeng/resources/themes/omega/theme.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/clusterize.js/clusterize.js"
+            ]
           },
           "configurations": {
             "production": {

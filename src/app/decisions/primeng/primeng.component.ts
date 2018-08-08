@@ -20,11 +20,11 @@ export class PrimengComponent implements OnInit, OnDestroy, AfterViewInit {
     this.mockDataSubscription = this.mockDataService.getDataV2()
       .subscribe(data => {
         this.mockData = data.cells;
-       // console.log(this.mockData);
-        // this.groupCategoryData = data.groupCategory;
+       console.log(this.mockData);
+
         // console.log(this.groupCategoryData);
-       // this.updateRowGroupMetadata();
-       //  console.log(`row group meta data`, this.rowGroupMetadata);
+        this.updateRowGroupMetadata();
+         console.log(`row group meta data`, this.rowGroupMetadata);
         this.cols = [];
         for (let col = 0; col < data.sizeY; col++) {
           const incCol = col + 1;
@@ -33,16 +33,18 @@ export class PrimengComponent implements OnInit, OnDestroy, AfterViewInit {
         }
       });
   }
+
   private  updateRowGroupMetadata() {
     this.rowGroupMetadata = {};
-    if (this.groupCategoryData.length > 0 && this.groupCategoryData.length === this.mockData.length ) {
+    if ( this.mockData.length ) {
       for (let  i = 0; i < this.mockData.length; i++) {
-        const groupCategory = this.groupCategoryData[i];
+        const rowData = this.mockData[i];
+        const groupCategory = rowData.category;
         if (i === 0) {
           this.rowGroupMetadata[groupCategory] = {index: 0, size: 1};
         } else {
           const previousRowData = this.mockData[i - 1];
-          const previousRowGroup = this.groupCategoryData[i - 1];
+          const previousRowGroup = previousRowData.category;
           if (groupCategory === previousRowGroup) {
             this.rowGroupMetadata[groupCategory].size++;
           } else {
