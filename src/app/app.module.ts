@@ -7,13 +7,15 @@ import { ClusterizeComponent } from './decisions/clusterize/clusterize.component
 import { MockDataService } from './services/mock-data.service';
 import { PrimengComponent } from './decisions/primeng/primeng.component';
 import { TableModule } from 'primeng/table';
+import { Ng2tableComponent} from './decisions/ng2table/ng2table.component';
 
 
 @NgModule({
   declarations: [
     AppComponent,
     ClusterizeComponent,
-    PrimengComponent
+    PrimengComponent,
+    Ng2tableComponent
   ],
   imports: [
     BrowserModule,
