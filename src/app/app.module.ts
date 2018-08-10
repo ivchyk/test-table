@@ -1,5 +1,6 @@
 import { BrowserModule } from '@angular/platform-browser';
 import { NgModule } from '@angular/core';
+import { CommonModule } from '@angular/common';
 
 import { AppComponent } from './app.component';
 import { AppRoutingModule  } from './app-routing.module';
@@ -7,29 +8,30 @@ import { ClusterizeComponent } from './decisions/clusterize/clusterize.component
 import { MockDataService } from './services/mock-data.service';
 import { PrimengComponent } from './decisions/primeng/primeng.component';
 import { TableModule } from 'primeng/table';
-import { Ng2tableComponent} from './decisions/ng2table/ng2table.component';
-import { PaginationModule } from 'ngx-bootstrap/pagination';
-import { Ng2TableModule } from 'ng2-table/ng2-table';
 import { FormsModule } from '@angular/forms';
-import { SmartTableComponent } from './decisions/smart-table/smart-table.component';
-import { Ng2SmartTableModule } from 'ng2-smart-table';
+import { jqxPivotGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxpivotgrid';
+import { JgridComponent } from './decisions/jgrid/jgrid.component';
+
+import { TreeGridComponent } from './decisions/tree-grid/tree-grid.component';
+import { jqxTreeGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtreegrid';
 
 @NgModule({
   declarations: [
     AppComponent,
     ClusterizeComponent,
     PrimengComponent,
-    Ng2tableComponent,
-    SmartTableComponent
+    jqxPivotGridComponent,
+    JgridComponent,
+    TreeGridComponent,
+    jqxTreeGridComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TableModule,
-    PaginationModule.forRoot(),
-    Ng2TableModule,
     FormsModule,
-    Ng2SmartTableModule
+    CommonModule
+
   ],
   providers: [
     MockDataService

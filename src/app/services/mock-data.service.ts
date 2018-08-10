@@ -2,6 +2,7 @@ import { Injectable } from '@angular/core';
 import { interval, Observable, of, Subscription } from 'rxjs';
 import { sample, take, map, mergeMap, timestamp } from 'rxjs/operators';
 import { TableData } from '../source/table-data';
+import { CurrencyIndex } from '../../../node_modules/@angular/common/src/i18n/locale_data';
 
 @Injectable({
   providedIn: 'root'
@@ -178,5 +179,93 @@ export class MockDataService {
       index = randomIndex;
     }
     return TableData[index];
+  }
+
+  public treeGridMockData() {
+    this.cellsData = [
+      {
+          'id': '1', 'name': 'Corporate Headquarters', 'budget': '1230000', 'location': 'Las Vegas',
+          'children':
+          [
+            {
+              'id': '2', 'name': 'Finance Division', 'budget': '423000', 'location': 'San Antonio',
+              'children':
+              [
+                  { 'id': '3', 'name': 'Accounting Department', 'budget': '113000', 'location': 'San Antonio' },
+                  {
+                      'id': '4', 'name': 'Investment Department', 'budget': '310000', 'location': 'San Antonio',
+                      'children':
+                      [
+                          { 'id': '5', 'name': 'Banking Office', 'budget': '240000', 'location': 'San Antonio' },
+                          { 'id': '6', 'name': 'Bonds Office', 'budget': '70000', 'location': 'San Antonio' },
+                      ]
+                  }
+              ]
+          },
+          {
+              'id': '7', 'name': 'Operations Division', 'budget': '600000', 'location': 'Miami',
+              'children':
+              [
+                  { 'id': '8', 'name': 'Manufacturing Department', 'budget': '300000', 'location': 'Miami' },
+                  { 'id': '9', 'name': 'Public Relations Department', 'budget': '200000', 'location': 'Miami' },
+                  { 'id': '10', 'name': 'Sales Department', 'budget': '100000', 'location': 'Miami' }
+              ]
+          },
+          { 'id': '11', 'name': 'Research Division', 'budget': '200000', 'location': 'Boston' }
+          ]
+      },
+      {
+        'id': '12', 'name': 'Another department', 'budget': '1230000', 'location': 'Las Vegas',
+        'children':
+        [
+          {
+            'id': '13', 'name': 'Finance Division', 'budget': '423000', 'location': 'San Antonio',
+            'children':
+            [
+                { 'id': '14', 'name': 'Accounting Department', 'budget': '113000', 'location': 'San Antonio' },
+                {
+                    'id': '15', 'name': 'Investment Department', 'budget': '310000', 'location': 'San Antonio',
+                    'children':
+                    [
+                        { 'id': '16', 'name': 'Banking Office', 'budget': '240000', 'location': 'San Antonio' },
+                        { 'id': '17', 'name': 'Bonds Office', 'budget': '70000', 'location': 'San Antonio' },
+                    ]
+                }
+            ]
+        },
+        {
+            'id': '18', 'name': 'Operations Division', 'budget': '600000', 'location': 'Miami',
+            'children':
+            [
+                { 'id': '19', 'name': 'Manufacturing Department', 'budget': '300000', 'location': 'Miami' },
+                { 'id': '20', 'name': 'Public Relations Department', 'budget': '200000', 'location': 'Miami' },
+                { 'id': '21', 'name': 'Sales Department', 'budget': '100000', 'location': 'Miami' }
+            ]
+        },
+        { 'id': '22', 'name': 'Research Division', 'budget': '200000', 'location': 'Boston' }
+        ]
+    }
+  ];
+
+  let j = 0;
+  while (j < 5000) {
+    this.cellsData[1].children[1].children.push({'id': '6', 'name': 'Bonds Office', 'budget': '70000', 'location': 'San Antonio'});
+    j++;
+  }
+  const source = interval(3000);
+    return source.pipe(
+      map (_ => {
+        // this.initDataV3();
+        return this.cellsData;
+      }),
+      take(1)
+    );
+  }
+
+  private pushRecord(structure: Array<any>, currentIndex: number) {
+    structure.push({
+      'id': currentIndex, 'name': 'Manufacturing Department', 'budget': '300000', 'location': 'Miami', 'children': []
+    });
+    return structure;
   }
 }

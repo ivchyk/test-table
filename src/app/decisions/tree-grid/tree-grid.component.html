@@ -1,0 +1,15 @@
+<div class="demo-header">Angular 6 UI component:  TreeGrid</div>
+<div *ngIf="dataAdapter !== undefined">
+  <jqxTreeGrid
+  [source]="dataAdapter"
+  [altRows]="true"
+  [columnsResize]="true"
+  [columns]="columns"
+  [columnGroups]="columnGroups"
+  [ready]="ready"
+  [theme]="'dark'"
+  [columnsReorder]="true"
+  #TreeGrid>
+</jqxTreeGrid>
+</div>
+
