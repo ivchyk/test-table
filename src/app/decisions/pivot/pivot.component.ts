@@ -44,7 +44,7 @@ export class PivotComponent implements OnInit, AfterViewInit {
         let values: Array<any> = [];
         values.push({ dataField: 'Name10', width: 100, 'function': 'median', text: 'Median', formatSettings: { align: 'right', prefix: '', decimalPlaces: 2 }})
         for (const colIndex in this.columns) {
-          if (colIndex > 2)
+          if (parseInt(colIndex) > 2)
           values.push({ dataField: this.columns[colIndex].datafield, width: 100, 'function': 'min', text: this.columns[colIndex].text, formatSettings: { align: 'left', prefix: '', decimalPlaces: 2 }})
         }
 
@@ -61,7 +61,7 @@ export class PivotComponent implements OnInit, AfterViewInit {
                   const index2 = Math.ceil( (values.length + 3) / 2);
                   median = (values[index1] + values[index2]) / 2;
                 } else {
-                  index = (values.length + 3) / 2;
+                 const index = (values.length + 3) / 2;
                   median = values[index];
                 }
 

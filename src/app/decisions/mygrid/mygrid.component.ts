@@ -15,7 +15,7 @@ export class MygridComponent implements OnInit {
   data: any[] = [];
   datafields: any[] = [];
   columns: any[] = [];
-  source: any[];
+  source: any;
   dataAdapter: any;
   listBoxSource: any = [];
   columngroups: any = [];
