@@ -1,0 +1,15 @@
+<div class="demo-header">Angular 6 UI component: Pivot Demo</div>
+<div *ngIf="pivotDataSource">
+  <jqxPivotGrid
+    #mypivot
+    [width]="800"
+    [height]="400"
+    [source]="pivotDataSource"
+    [autoResize] = "false"
+    [multipleSelectionEnabled] = "true"
+    [treeStyleRows] = "true"
+    [cellsRenderer] = "myCellsRenderer"
+  >
+  </jqxPivotGrid>
+</div>
+

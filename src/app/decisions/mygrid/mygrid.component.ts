@@ -36,12 +36,6 @@ export class MygridComponent implements OnInit {
       .subscribe(mock => {
         this.datafields = mock.datafields;
         this.columns = mock.columns;
-        this.columns = this.columns.map(
-          colItem => {
-
-            return colItem;
-          }
-        );
         for (const colIndex in this.columns) {
           if (this.columns[colIndex].datafield === 'Name3') {
             this.columns[colIndex]['cellclassname'] = this.cellClass;

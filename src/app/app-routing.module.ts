@@ -7,7 +7,7 @@ import { PrimengComponent } from './decisions/primeng/primeng.component';
 import { JgridComponent } from './decisions/jgrid/jgrid.component';
 import { TreeGridComponent } from './decisions/tree-grid/tree-grid.component';
 import { MygridComponent } from './decisions/mygrid/mygrid.component'
-
+import { PivotComponent } from './decisions/pivot/pivot.component'
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: 'clusterize', component: ClusterizeComponent },
@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'jgrid', component: JgridComponent},
   { path: 'tree-grid', component: TreeGridComponent },
   { path: 'mygrid', component: MygridComponent },
+  { path: 'pivot', component: PivotComponent },
 ];
 
 @NgModule({
