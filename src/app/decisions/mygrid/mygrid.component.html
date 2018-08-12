@@ -1,0 +1,15 @@
+<div class="demo-header">Angular 6 UI component: Grid Demo</div>
+<div *ngIf="data">
+
+  <jqxListBox *ngIf="listBoxSource.length > 0" style="float: left" (onCheckChange)="myListBoxOnCheckChange($event)"
+              [width]="200" [height]="200" [source]="listBoxSource" [checkboxes]="true">
+  </jqxListBox>
+
+  <jqxGrid #mygrid [groupable]="true"
+           [width]="850" [source]="dataAdapter" [columns]="columns"
+           [sortable]="true" [altrows]="true" [filterable]="true"
+           [columnsresize]="true" [columnsreorder]="true"
+  >
+  </jqxGrid>
+</div>
+

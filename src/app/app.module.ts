@@ -15,6 +15,10 @@ import { JgridComponent } from './decisions/jgrid/jgrid.component';
 import { TreeGridComponent } from './decisions/tree-grid/tree-grid.component';
 import { jqxTreeGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxtreegrid';
 
+import { MygridComponent } from './decisions/mygrid/mygrid.component';
+import { jqxGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid';
+import { jqxListBoxComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlistbox';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -23,7 +27,10 @@ import { jqxTreeGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqx
     jqxPivotGridComponent,
     JgridComponent,
     TreeGridComponent,
-    jqxTreeGridComponent
+    jqxTreeGridComponent,
+    MygridComponent,
+    jqxGridComponent,
+    jqxListBoxComponent
   ],
   imports: [
     BrowserModule,

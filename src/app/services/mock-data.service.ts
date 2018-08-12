@@ -2,7 +2,7 @@ import { Injectable } from '@angular/core';
 import { interval, Observable, of, Subscription } from 'rxjs';
 import { sample, take, map, mergeMap, timestamp } from 'rxjs/operators';
 import { TableData } from '../source/table-data';
-import { CurrencyIndex } from '../../../node_modules/@angular/common/src/i18n/locale_data';
+
 
 @Injectable({
   providedIn: 'root'
@@ -11,11 +11,15 @@ export class MockDataService {
   private cells: Array<Array<any>> = [];
   private cellsData: Array<any> = [];
   private tableHeader: Array<any>;
-  private row: number = 15000;
-  private col: number = 20;
+  private row: number = 1000;
+  private col: number = 200;
   private rowDelta: number = 0; // Шанс зміни кількості рядків.
   private cellDelta: number = 0.1; // Шанс зміни значення комірки.
   private groupFactor: Array<any> = [];
+
+  private columns: Array<any> = [];
+  private datafields: Array<any> = [];
+  private columngroups: Array<any> = [];
 
   constructor() {}
 
@@ -105,6 +109,74 @@ export class MockDataService {
     }
   }
 
+  private initDataV4(): void {
+
+    this.columngroups =
+      [
+        { text: 'Product Details', align: 'center', name: 'ProductDetails' },
+        { text: 'Order Details', parentgroup: 'ProductDetails', align: 'center', name: 'OrderDetails' },
+        { text: 'Location', align: 'center', name: 'Location' }
+      ];
+
+
+    const chanceRowCount = Math.floor(Math.random() * 10) / 10;
+    if (chanceRowCount < this.rowDelta) {
+      const newRowCount  = Math.floor(Math.random() * 10) + 1;
+      if (newRowCount < this.row ) {
+        this.cells.slice(newRowCount, this.row - 1);
+      }
+      this.row = newRowCount;
+    }
+
+    for (let rowIndex = 0; rowIndex < this.row; rowIndex++) {
+      if (this.cellsData[rowIndex] === undefined) {
+        this.cellsData[rowIndex] = { };
+      }
+      for (let colIndex = 0; colIndex < this.col; colIndex++) {
+        if (rowIndex == 0) {
+          let col = { datafield: 'Name' + colIndex, text: 'Column ' + (1 + colIndex), width: 100,
+            cellsalign: 'center', align: 'center',};
+          if (colIndex === 0) {
+            col['pinned'] = true;
+          }
+          if (colIndex > 1 && colIndex < 5) {
+            col['columngroup'] = 'ProductDetails';
+          }
+          if (colIndex >= 5 && colIndex < 10) {
+            col['columngroup'] = 'OrerDetails';
+          }
+          if (colIndex > 20 && colIndex < 25) {
+            col['columngroup'] = 'Location';
+          }
+          this.columns.push(col);
+          if (colIndex === 0 || colIndex === 1) {
+            this.datafields.push({ name: 'Name' + colIndex, type: 'string' });
+          } else {
+            this.datafields.push({ name: 'Name' + colIndex, type: 'number' });
+          }
+        }
+
+        if (colIndex === 0) {
+          this.cellsData[rowIndex]['Name' + colIndex] =  rowIndex % 2 == 1 ? 'Long data' : 'Short data';
+        } else if (colIndex === 1) {
+          this.cellsData[rowIndex]['Name' + colIndex] =  'some data';
+        } else {
+          const chanceCellValue = Math.floor(Math.random() * 10) / 10;
+          if (this.cellsData[rowIndex]['Name' + colIndex] === undefined
+            || chanceCellValue < this.cellDelta
+          ) {
+             this.cellsData[rowIndex]['Name' + colIndex] =
+            //   {
+            //   'value': Math.floor(Math.random() * 500) + 1,
+            //   'cellColor': '#' + Math.floor(Math.random() * 16777215).toString(16) + '20'
+            // };
+            Math.floor(Math.random() * 500) + 1
+          }
+        }
+      }
+    }
+  }
+
   public  getData() {
     const source = interval(3000);
     return source.pipe(
@@ -140,6 +212,17 @@ export class MockDataService {
     );
   }
 
+  public  getDataV4() {
+    const source = interval(3000);
+    return source.pipe(
+      map (_ => {
+        this.initDataV4();
+        return {cells: this.cellsData, datafields: this.datafields, columns: this.columns, colGroups: this.columngroups};
+      }),
+      take(1)
+    );
+  }
+
   private makeCategories(rowsAmount: number, rowIndex: number,  groupSize: number = 20) {
     if (groupSize === 0) {
       return [];
@@ -157,7 +240,7 @@ export class MockDataService {
       let groupCounter = 1;
 
       for (let  i = 0; i < rowsAmount; i++) {
-        categories[i] = 'Category ' + groupCounter;
+        categories[i] = 'Column ' + groupCounter;
         if (counter === groupSize) {
           counter = 1;
           groupCounter++;

@@ -23,6 +23,8 @@
   ],
   "files": [
     "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxpivotgrid.ts",
-    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxtreegrid.ts"
+    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxtreegrid.ts",
+    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid.ts",
+    "node_modules/jqwidgets-scripts/jqwidgets-ts/angular_jqxlistbox.ts",
   ]
 }
