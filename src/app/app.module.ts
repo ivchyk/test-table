@@ -20,6 +20,11 @@ import { jqxGridComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxgrid
 import { jqxListBoxComponent } from 'jqwidgets-scripts/jqwidgets-ts/angular_jqxlistbox';
 import { PivotComponent } from './decisions/pivot/pivot.component'
 
+import { AgGridModule } from 'ag-grid-angular';
+import { AgGridComponent } from './decisions/ag-grid/ag-grid.component'
+import { HttpClientModule } from '@angular/common/http';
+import 'ag-grid-enterprise';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -32,15 +37,17 @@ import { PivotComponent } from './decisions/pivot/pivot.component'
     MygridComponent,
     jqxGridComponent,
     jqxListBoxComponent,
-    PivotComponent
+    PivotComponent,
+    AgGridComponent
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
     TableModule,
     FormsModule,
-    CommonModule
-
+    CommonModule,
+    HttpClientModule,
+    AgGridModule.withComponents([])
   ],
   providers: [
     MockDataService

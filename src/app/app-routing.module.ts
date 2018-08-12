@@ -8,6 +8,8 @@ import { JgridComponent } from './decisions/jgrid/jgrid.component';
 import { TreeGridComponent } from './decisions/tree-grid/tree-grid.component';
 import { MygridComponent } from './decisions/mygrid/mygrid.component'
 import { PivotComponent } from './decisions/pivot/pivot.component'
+import { AgGridComponent } from './decisions/ag-grid/ag-grid.component'
+
 const routes: Routes = [
   { path: '', redirectTo: '/', pathMatch: 'full'},
   { path: 'clusterize', component: ClusterizeComponent },
@@ -16,6 +18,7 @@ const routes: Routes = [
   { path: 'tree-grid', component: TreeGridComponent },
   { path: 'mygrid', component: MygridComponent },
   { path: 'pivot', component: PivotComponent },
+  { path: 'ag-grid', component: AgGridComponent },
 ];
 
 @NgModule({

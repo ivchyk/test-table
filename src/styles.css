@@ -1,4 +1,6 @@
 /* You can add global styles to this file, and also import other style files */
+@import "~ag-grid/dist/styles/ag-grid.css";
+@import "~ag-grid/dist/styles/ag-theme-balham.css";
 .demo-header {
   font-size: 1.5em;
   color: #827979dd;
